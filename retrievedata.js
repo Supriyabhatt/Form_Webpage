@@ -62,7 +62,16 @@ function setter(id, val) {
     } else if (id == "aadhar") {
         document.getElementById("text_AadharNumber").value = val;
     } else if (id == "blood") {
-        document.getElementById("bloodAlert").innerHTML = val;
+        var dropdown = document.getElementById("blood");
+        var i = 0;
+        for (var i = 0; i < dropdown.length; i++) {
+            if (dropdown.options[i].text == val) {
+                break;
+            }
+        }
+        if (i != dropdown.length) {
+            dropdown.selectedIndex = i;
+        }
     } else if (id == "dob") {
         document.getElementById("dobAlert").innerHTML = val;
     } else if (id == "gender") {
@@ -82,7 +91,16 @@ function setter(id, val) {
     } else if (id == "country") {
         if (val != "Indian") {
             document.getElementById("countries").style.visibility = "visible";
-            //show selected country based on val
+            var dropdown = document.getElementById("countries");
+            var i = 0;
+            for (i = 0; i < dropdown.length; i++) {
+                if (dropdown.options[i].text == val) {
+                    break;
+                }
+            }
+            if (i != dropdown.length) {
+                dropdown.selectedIndex = i;
+            }
         }
     } else if (id == "category") {
         if (val == "ST") {
@@ -118,4 +136,15 @@ function setter(id, val) {
     } else if (id == "pin") {
         document.getElementById("text_Pincode").value = val;
     }
+}
+
+function bloodSelect(val) {
+    var blood = document.getElementById("blood");
+    for (i = 0; i < blood.length; i++) {
+        if (blood.options[i].text == val) {
+            alert("found at index: " + i);
+            break;
+        }
+    }
+    blood.selectedIndex = i;
 }

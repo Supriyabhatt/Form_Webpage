@@ -488,18 +488,20 @@
 
     function showForm() {
         if (document.getElementById("sendData").value != "Back") {
-            //            document.getElementById("userForm").reset();
+            resetForm();
             document.getElementById("sendData").value = "Back";
             document.getElementById("retrieveData").style.visibility = "hidden";
             document.getElementById("alertMessage").style.visibility = "hidden";
             document.getElementById("userForm").style.visibility = "visible"
+            hideCountry();
             hidemobiletext();
             formeditControl("enable");
         } else {
             //reset form values and hide form
-            //            document.getElementById("userForm").reset();
+            resetForm();
             document.getElementById("sendData").value = "Send Data";
             document.getElementById("userForm").style.visibility = "hidden";
+            document.getElementById("countries").style.visibility = "hidden";
             document.getElementById("retrieveData").style.visibility = "visible";
             document.getElementById("retrieveData").value = "Retrieve Data";
             document.getElementById("alertMessage").style.visibility = "visible";
@@ -519,6 +521,40 @@
         hidemobiletext();
         formeditControl("disable");
     }
+
+
+    function resetForm() {
+        document.getElementById("text_Name").value = "";
+        document.getElementById("text_FatherName").value = "";
+        document.getElementById("text_MotherName").value = "";
+        document.getElementById("text_MobileNumber").value = "";
+        document.getElementById("text_FatherNumber").value = "";
+        document.getElementById("text_MotherNumber").value = "";
+        document.getElementById("text_AadharNumber").value = "";
+        document.getElementById("blood").selectedIndex = 0;
+        document.getElementById("text_Dob").value = "";
+        document.getElementById("radio_GenderM").checked = false;
+        document.getElementById("radio_GenderF").checked = false;
+        document.getElementById("radio_GenderO").checked = false;
+        document.getElementById("radio_Indian").checked = false;
+        document.getElementById("radio_Foreigner").checked = false;;
+        document.getElementById("countries").selectedIndex = 0;
+        document.getElementById("radio_Catsc").checked = false;;
+        document.getElementById("radio_Catobc").checked = false;
+        document.getElementById("radio_Catst").checked = false;
+        document.getElementById("radio_Catgen").checked = false;
+        document.getElementById("radio_pYes").checked = false;
+        document.getElementById("radio_pNo").checked = false;
+        document.getElementById("radio_wdpYes").checked = false;
+        document.getElementById("radio_wdpNo").checked = false;
+        document.getElementById("text_Email").value = "";
+        document.getElementById("text_CAddress").value = "";
+        document.getElementById("text_PAddress").value = "";
+        document.getElementById("text_Pincode").value = "";
+        var state = "";
+        var city = "";
+    }
+
 
     function process() {
         if (document.getElementById("userForm").style.visibility == "hidden") {
@@ -542,6 +578,7 @@
                 }
             }
         } else if (document.getElementById("retrieveData").value == "Discard") {
+            var mob = document.getElementById("text_MobileNumber").value;
             retrieve(mob);
         } else {
             document.getElementById("retrieveData").value = "Discard";
@@ -562,14 +599,14 @@
         var fmob = document.getElementById("text_FatherNumber");
         var mmob = document.getElementById("text_MotherNumber");
         var aadhar = document.getElementById("text_AadharNumber");
-        var blood = document.getElementById("blood").options[document.getElementById("blood").selectedIndex].text;
+        var blood = document.getElementById("blood");
         var dob = document.getElementById("text_Dob");
         var genderm = document.getElementById("radio_GenderM");
         var genderf = document.getElementById("radio_GenderF");
         var gendero = document.getElementById("radio_GenderO");
         var nati = document.getElementById("radio_Indian");
         var natf = document.getElementById("radio_Foreigner");
-        var country = document.getElementById("countries").options[document.getElementById("countries").selectedIndex].text;
+        var country = document.getElementById("countries");
         var catsc = document.getElementById("radio_Catsc");
         var catobc = document.getElementById("radio_Catobc");
         var catst = document.getElementById("radio_Catst");
@@ -612,6 +649,7 @@
             caddress.disabled = false;
             paddress.disabled = false;
             pincode.disabled = false;
+            document.getElementById("checkbox_SameAddress").disabled = false;
             //            state.disabled = false;
             //            city.disabled = false;
         } else if (editcontrol == "disable") {
